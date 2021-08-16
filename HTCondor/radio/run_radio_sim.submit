@@ -1,0 +1,21 @@
+executable	= /user/rstanley/simulations/HTCondor/radio/run_radio_sim.sh
+
+#**
+# This option takes all your env variables from your current session
+getenv          = false
+
+universe        = vanilla
+notification    = never
+request_memory  = 8000
+
+# These arguments will be passed to the bash script
+Arguments = $(THETA_DIST) $(THETA_BIN) $(ENERGY_BIN) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION)
+
+output          = /user/rstanley/CORSIKA/radiologs/out/$(LOG_NAME).out 
+#**
+error           = /user/rstanley/CORSIKA/radiologs/err/$(LOG_NAME).err 
+#**
+
+queue
+
+#REMEMBER TO ADD A LOG_NAME TO THE VARIABLES WHEN SUBMITTING

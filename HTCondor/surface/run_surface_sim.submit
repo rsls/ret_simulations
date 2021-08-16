@@ -1,0 +1,23 @@
+executable	= /user/rstanley/simulations/HTCondor/surface/run_surface_sim.sh
+
+#**
+# This option takes all your env variables from your current session
+getenv          = false
+
+universe        = vanilla
+notification    = never
+request_memory  = 8000
+
+# These arguments will be passed to the bash script
+Arguments = $(THETA_DIST) $(THETA_BIN) $(ENERGY_BIN) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(RADIUS) $(TRY_NUMBER)
+
+output          = /user/rstanley/CORSIKA/surfacelogs/out/$(LOG_NAME).out 
+#**
+error           = /user/rstanley/CORSIKA/surfacelogs/err/$(LOG_NAME).err 
+#**
+
+queue
+
+#REMEMBER TO ADD A LOG_NAME TO THE VARIABLES WHEN SUBMITTING
+
+

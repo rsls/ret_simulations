@@ -1,0 +1,23 @@
+executable	= /user/rstanley/simulations/HTCondor/corsika/run_corsika_shower.sh
+
+#**
+# This option takes all your env variables from your current session
+getenv          = false
+
+universe        = vanilla
+notification    = never
+request_memory  = 8000
+
+# These arguments will be passed to the bash script
+Arguments = $(THETA_DIST) $(THETA_BIN) $(ENERGY_BIN) $(PRIM_PART) $(RUN_NUMBER) $(RAND_SEED) $(SHW_ENERGY) $(PRIM_TYPE) $(AZIMUTH_ANGLE) $(ZENITH_ANGLE) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION)
+
+output          = /user/rstanley/CORSIKA/fixedlogs/out/$(LOG_NAME).out
+#**
+error           = /user/rstanley/CORSIKA/fixedlogs/err/$(LOG_NAME).err 
+#**
+
+queue
+
+#REMEMBER TO ADD A LOG_NAME TO THE VARIABLES WHEN SUBMITTING
+
+
