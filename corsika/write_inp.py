@@ -55,42 +55,42 @@ if options.location=="td":
 
     if options.season=="s":
         if options.time=="d":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_14.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_14.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_14.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_14.DAT")
 
         elif options.time=="n":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_20.DAT")
 
         elif options.time=="g":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2014_10_10_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_10_10_20.DAT")
 
     elif options.season=="w":
         if options.time=="d":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_9_9_14.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_9_9_14.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_9_9_14.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_9_9_14.DAT")
 
         elif options.time=="n":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
 
         elif options.time=="g":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
 
     elif options.season=="g":
         if options.time=="d":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_9_9_14.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_9_9_14.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_9_9_14.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_9_9_14.DAT")
 
         elif options.time=="n":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_8_17_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2014_8_17_20.DAT")
 
         elif options.time=="g":
-            print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
-            #print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
+            #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
+            print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
 
 print("USER    rstanley")
 print("EXIT")
