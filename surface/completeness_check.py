@@ -69,10 +69,10 @@ for i in range(energy_bin_list.shape[0]):
                     attempt_success[l] = 0
 
                 elif os.path.isfile(dat_file) and not os.path.isfile(deposit_file):
-                    attempt_success = 1
+                    attempt_success[l] = 1
 
                 elif not os.path.isfile(dat_file):
-                    attempt_success = 2
+                    attempt_success[l] = 2
                     print(directory, 'with', long_run_number, 'missing dat file')
 
             try_number_fail = np.where(attempt_success == 1)
