@@ -67,14 +67,14 @@ ant_pos_xyz, ant_pos_uvw, time, efield_uvw, efield_xyz, poldata, zenith, azimuth
 Efield filter
 applies filter to CoREAS data which is for an infinite bandwidth
 """
-efield_filt, time_filt = process_data.lofar_filter(efield_uvw, time, filt_low, filt_high, 1.0)
-#efield_filt_xy, time_filt = process_data.lofar_filter(efield_xyz, time, filt_low, filt_high, 1.0)
+efield_filt_uvw, time_filt = process_data.lofar_filter(efield_uvw, time, filt_low, filt_high, 1.0)
+efield_filt_xyz, time_filt = process_data.lofar_filter(efield_xyz, time, filt_low, filt_high, 1.0)
 
 """
 Fluence calculation
 """
-fluence = fluence.calculate_energy_fluence_vector(efield_filt, time_filt, signal_window=100.0, remove_noise=True)
-#fluence_xyz = fluence.calculate_energy_fluence_vector(efield_filt_xyz, time_filt, signal_window=100.0, remove_noise=True)
+fluence_uvw = fluence.calculate_energy_fluence_vector(efield_filt_uvw, time_filt, signal_window=100.0, remove_noise=True)
+fluence_xyz = fluence.calculate_energy_fluence_vector(efield_filt_xyz, time_filt, signal_window=100.0, remove_noise=True)
 
 """
 parameter conversion from radians to degrees
@@ -82,24 +82,24 @@ parameter conversion from radians to degrees
 theta = 180 * (zenith/np.pi)
 phi = 180 * (azimuth_rot/np.pi)
 
-
+"""
 data_dict = {"energy":energy, "zenith":theta, "azimuth":phi, "xmax":xmax, "filter low":filt_low, "filter high":filt_high, "ant pos shw":ant_pos_uvw, "ant pos grd":ant_pos_xyz, "time":time, "efield shw":efield_uvw, "efield grd":efield_xyz, "poldata":poldata, "efield filt shw":efield_filt, "time filt":time_filt, "filt fluence":fluence}
 
-out_file = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}/RAD{9}.pkl'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh shower_number)
+out_file = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}/RAD{9}.pkl'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh, shower_number)
 
 out_file_obj = open(out_file, 'wb')
 pickle.dump(data_dict, out_file_obj)
 out_file_obj.close()
-
+"""
 
 """
 Uncomment this block if you want to plot the graphs for a single shower as a sanity check and to check if you understand what calculations are being done above
 """
-"""
+
 ant_pos_xyz_x, ant_pos_xyz_y = ant_pos_xyz.T[0], ant_pos_xyz.T[1]
 ant_pos_uvw_x, ant_pos_uvw_y = ant_pos_uvw.T[0], ant_pos_uvw.T[1]
 
-fluence_all = fluence.T[0] + fluence.T[1]
+fluence_all = fluence_uvw.T[0] + fluence_uvw.T[1]
 fluence_all_xyz = fluence_xyz.T[0] + fluence_xyz.T[1]
 
 #print(theta, 'degrees,', phi, 'degrees,', np.log10(energy), 'GeV,', xmax, 'g/cm^2')
@@ -109,7 +109,7 @@ fluence_all_xyz = fluence_xyz.T[0] + fluence_xyz.T[1]
 #print('time filt', time_filt.shape)
 #print('fluence', fluence.shape)
 
-plot_dir = '/user/rstanley/simulations/efield/HolyGrailofFluenceCalculation/'
+plot_dir = '/user/rstanley/simulations/radio/162_0_46/'
 
 lim = np.max(ant_pos_xyz_x) + 100
 #Antenna positions
@@ -162,8 +162,8 @@ plt.savefig(plot_name)
 plt.close()
 
 #Filtered electric field in antenna 40
-plt.plot(time_filt[40], efield_filt[40].T[0], label='horizontal?')
-plt.plot(time_filt[40], efield_filt[40].T[1], label='vertical?')
+plt.plot(time_filt[40], efield_filt_uvw[40].T[0], label='horizontal?')
+plt.plot(time_filt[40], efield_filt_uvw[40].T[1], label='vertical?')
 plt.legend()
 plt.title('Filtered electric field in antenna 40 in shower plane')
 plt.xlabel('Time')
@@ -202,4 +202,4 @@ plt.suptitle('Xmax = {0} g/cm^2, Zenith = {1} degree'.format(xmax, theta))
 plot_name = plot_dir + 'interpolation.png'
 plt.savefig(plot_name)
 plt.close()
-"""
+
