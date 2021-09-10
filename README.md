@@ -87,8 +87,33 @@ This command will create a dagfile with all the submission parameters for the si
 
 Navigate to this directory and then run the command ` condor_submit_dag run_corsika_shower_yyyymmdd_hhmmss.dag `. This will begin the submission process for the CORSIKA showers. Once the CORSIKA shower has completed, it also runs a GEANT4 simulation necessary for progressing to the surface simulations. The radio simulations do not require these GEANT4 simulations, instead the requirements are met by running CoREAS in conjunction with CORSIKA. 
 
-To check up on the progress of your simulations use ` condor_q `
+To check up on the progress of your simulations use ` condor_q `.
+
+Once all the simulations have been run, you can check how complete the resulting library is by using the programme ` ~/ret_simulations/corsika/completeness_check.py `. Running `python completeness_check.py -h ` prints the help.
+
+```
+Usage: completeness_check.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -d DISTRIBUTION, --distribution=DISTRIBUTION
+                        theta angle distribution, flat in theta=theta, flat in
+                        cos(theta)=costheta
+  -p PRIMARY, --primary=PRIMARY
+                        primary particle type, proton or iron
+  -s SEASON, --season=SEASON
+                        season for atmosphere profile, s=summer, w=winter,
+                        g=general
+  -t TIME, --time=TIME  time for atmospheric profile, d=day, n=night,
+                        g=general
+  -l LOCATION, --location=LOCATION
+                        location of detector, td=Taylor Dome
+```
+
+Using the same parameters as above as an example, a completeness check can be run using ` python completeness_check.py -d costheta -p proton -s s -t g -l td `. This will print all the simulations that need to be run again to make the library complete.
 
 ### Surface
+
+Running the surface simulations requires that all the CORSIKA simulations have finished successfully. 
 
 ### Radio
