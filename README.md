@@ -83,7 +83,7 @@ Choose the values of the parameters that you want to run the simulations with an
 
 ` python write_corsika_dag.py -n 1000 -g -1 -d costheta -b 0 -p proton -s s -t g -l td `
 
-This command will create a dagfile with all the submission parameters for the simulations to be run using the parameters specified. This dagfile can be found in the directory ` ~/ret_simulations./HTCondor/corsika/dagfiles ` and then in nested directory, the first labelled with the date and the second with the time ie. ` ~/ret_simulations./HTCondor/corsika/dagfiles/yyyymmdd/hhmmss `.
+This command will create a dagfile with all the submission parameters for the simulations to be run using the parameters specified. This dagfile can be found in the directory ` ~/ret_simulations/HTCondor/corsika/dagfiles ` and then in nested directory, the first labelled with the date and the second with the time ie. ` ~/ret_simulations/HTCondor/corsika/dagfiles/yyyymmdd/hhmmss `.
 
 Navigate to this directory and then run the command ` condor_submit_dag run_corsika_shower_yyyymmdd_hhmmss.dag `. This will begin the submission process for the CORSIKA showers. Once the CORSIKA shower has completed, it also runs a GEANT4 simulation necessary for progressing to the surface simulations. The radio simulations do not require these GEANT4 simulations, instead the requirements are met by running CoREAS in conjunction with CORSIKA. 
 
@@ -114,6 +114,46 @@ Using the same parameters as above as an example, a completeness check can be ru
 
 ### Surface
 
-Running the surface simulations requires that all the CORSIKA simulations have finished successfully. 
+Running the surface simulations requires that all the CORSIKA simulations have finished successfully. Once they are complete, the surface simulation dagfiles can be created. Navigate to the directory ` ~/ret_simulations/HTCondor/surface/write_dag `.
+
+Run command `python write_surface_dag.py -h `. This will bring up the help text from the programme. 
+
+```
+Usage: write_surface_dag.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -r RUNNUMBER, --runnumber=RUNNUMBER
+                        number of showers to use at each energy
+  -d DISTRIBUTION, --distribution=DISTRIBUTION
+                        theta angle distribution, flat in theta=theta, flat in
+                        cos(theta)=costheta
+  -z ZENITHBIN, --zenithbin=ZENITHBIN
+                        zenith bin number of shower, 0-3
+  -p PRIMARY, --primary=PRIMARY
+                        primary particle type, proton or iron
+  -s SEASON, --season=SEASON
+                        season for atmosphere profile, s=summer, w=winter,
+                        g=general
+  -t TIME, --time=TIME  time for atmospheric profile, d=day, n=night,
+                        g=general
+  -l LOCATION, --location=LOCATION
+                        location of detector, td=Taylor Dome
+  --arraynumber=ARRAYNUMBER
+                        number of array layout
+  --radius=RADIUS       maximum radius of shower core
+  --trynumber=TRYNUMBER
+                        number of core positions to chose
+```
+
+Choose the values of the parameters that you want to run the simulations with and run a command with the format:
+
+` python write_surface_dag.py -r 500 -d costheta -z 0 -p proton -s s -t g -l td --arraynumber 1 --radius 300 --trynumber 100 `
+
+This command will create a dagfile with all the submission parameters for the simulations to be run using the parameters specified. This dagfile can be found in the directory ` ~/ret_simulations/HTCondor/surface/dagfiles ` and then in nested directory, the first labelled with the date and the second with the time ie. ` ~/ret_simulations/HTCondor/surface/dagfiles/yyyymmdd/hhmmss `. 
+
+Navigate to this directory and then run the command ` condor_submit_dag run_surface_sim_yyyymmdd_hhmmss.dag `. This will begin the submission process for the surface simulations. 
+
+To check up on the progress of your simulations use ` condor_q `.
 
 ### Radio
