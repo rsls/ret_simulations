@@ -14,8 +14,7 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
     corex_list = np.empty()
     corey_list = np.empty()
     trigger_list = np.empty()
-
-
+    trigger_number_list = np.empty()
 
     for i in range(len(energy_bin_list)):
         energy_bin = energy_bin_list[i]
@@ -50,6 +49,8 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
                             if station_trigger == 2:
                                 triggered_stations[m] = 1
 
+                        triggered_stations_number = len(triggered_stations[triggered_stations == 1])
+
                         detector_halves = np.split(triggered_stations, 2)
                         number_in_half = station_number / 2
 
@@ -65,6 +66,7 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
                         corex_list = np.concatenate((corex_list, [corex]))
                         corey_list = np.concatenate((corey_list, [corey]))
                         trigger_list = np.concatenate((trigger_list, [trigger]))
+                        trigger_number_list = np.concatenate((trigger_number_list, [triggered_stations_number]))
     
-    shower_dict = dictionary = {'energy':energy_list, 'zenith':zenith_list, 'azimuth':azimuth_list, 'corex':corex_list, 'corey':corey_list, 'trigger':trigger_list}
+    shower_dict = dictionary = {'energy':energy_list, 'zenith':zenith_list, 'azimuth':azimuth_list, 'corex':corex_list, 'corey':corey_list, 'trigger':trigger_list, 'trigger number':trigger_number_list}
 return shower_dict
