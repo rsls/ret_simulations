@@ -11,9 +11,9 @@ request_memory  = 8000
 # These arguments will be passed to the bash script
 Arguments = $(THETA_DIST) $(THETA_BIN) $(ENERGY_BIN) $(PRIM_PART) $(RUN_NUMBER) $(RAND_SEED) $(SHW_ENERGY) $(PRIM_TYPE) $(AZIMUTH_ANGLE) $(ZENITH_ANGLE) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION)
 
-output          = /user/rstanley/CORSIKA/logs/out/$(LOG_NAME).out
+output          = /user/rstanley/CORSIKA/corsikalogs/out/$(LOG_NAME).out
 #**
-error           = /user/rstanley/CORSIKA/logs/err/$(LOG_NAME).err 
+error           = /user/rstanley/CORSIKA/corsikalogs/err/$(LOG_NAME).err 
 #**
 
 queue
