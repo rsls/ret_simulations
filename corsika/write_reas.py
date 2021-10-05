@@ -29,6 +29,7 @@ print("CoreCoordinateWest  =  0  ; in cm")
 
 if options.location=="td":
     print("CoreCoordinateVertical  =  +2400.0E+02  ; in cm")
+#    print("CoreCoordinateVertical  =  +0.0E+0  ; in cm")
 
 print("# parameters setting up the temporal observer configuration:    =               ;")
 print("AutomaticTimeBoundaries  =  4.0E-07  ; 0: off, x: automatic boundaries with width x in s")

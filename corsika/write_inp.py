@@ -92,5 +92,7 @@ if options.location=="td":
             #print("ATMFILE /user/rstanley/CORSIKA/GDAS/atmfiles/ATM_2010_8_17_20.DAT")
             print("ATMFILE /pnfs/iihe/radar/gdas/td/atmfiles/ATM_2010_8_17_20.DAT")
 
+#print("OBSLEV 2835.0E+02")
+#print("OBSLEV 0.0E+01")
 print("USER    rstanley")
 print("EXIT")
