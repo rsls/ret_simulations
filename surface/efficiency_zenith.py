@@ -19,7 +19,7 @@ def get_eff_zenith(shower_df):
         zenith_low = zenith_bin_low_list[i]
         zenith_high = zenith_bin_high_list[i]
         
-        zenith_df = shower_df[((shower_df['zenith'] > zenith_low) and (shower_df['zenith']<= zenith_high))]
+        zenith_df = shower_df[((shower_df['zenith'] > zenith_low) & (shower_df['zenith']<= zenith_high))]
         trigger_df = zenith_df[(zenith_df['trigger'] == 1)]
 
         number_of_showers = len(zenith_df.index)
@@ -27,4 +27,4 @@ def get_eff_zenith(shower_df):
     
         zenith_trigger_efficiency[i] = number_of_trigger / number_of_showers
 
-return zenith_bin_low_deg_list, zenith_trigger_efficiency
+    return zenith_bin_low_deg_list, zenith_trigger_efficiency

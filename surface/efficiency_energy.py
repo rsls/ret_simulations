@@ -8,7 +8,7 @@ def get_eff_energy(shower_df):
 
     energy_bin_list = np.array([150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 184, 186, 188, 190])
     energy_bin_low_list = energy_bin_list - 1
-    energy_bin_high_list = energy_bin_list + 1
+    energy_bin_high_list = energy_bin_list + 1 
 
     log_energy_list = energy_bin_list / 10
     log_energy_low_list = energy_bin_low_list / 10
@@ -20,7 +20,7 @@ def get_eff_energy(shower_df):
         energy_low = 10 ** log_energy_low_list[i]
         energy_high = 10 ** log_energy_high_list[i]
 
-        energy_df = shower_df[((shower_df['energy'] >= energy_low) and (shower_df['energy']<= energy_high))]
+        energy_df = shower_df[((shower_df['energy'] >= energy_low) & (shower_df['energy']<= energy_high))]
         trigger_df = energy_df[(energy_df['trigger'] == 1)]
 
         number_of_showers = len(energy_df.index)
@@ -28,6 +28,6 @@ def get_eff_energy(shower_df):
     
         energy_trigger_efficiency[i] = number_of_trigger / number_of_showers
 
-return log_energy_list, energy_trigger_efficiency
+    return log_energy_list, energy_trigger_efficiency
 
 

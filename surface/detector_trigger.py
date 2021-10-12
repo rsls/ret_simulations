@@ -52,20 +52,39 @@ det_number = det_positions.shape[0]
 station_number = int(det_number / 2)
 
 #create list of ALL showers for a particular array layout and whether they trigger the array above a threshold with half the stations triggering 
-shower_dict = sl.get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, array_number, shower_number, trys_number, station_number, trigger_thresh)
+#if it doesn't exist already
+shower_dict_file = 'shower_info_{0}_{1}.pkl'.format(array_number, int(trigger_thresh))
+shower_dict_path = '/user/rstanley/detector/shower_info/' + shower_dict_file
 
-out_file = open('shower_info_{0}_{1}.pkl'.format(arraynr, int(trigger_thresh)), 'wb')
-pickle.dump(shower_dict, out_file)
-out_file.close()
+if os.path.isfile(shower_dict_path):
+    in_file = open(shower_dict_path, 'rb')
+    shower_dict = pickle.load(in_file)
+    print('loaded pickled shower list file')
+
+else:
+    shower_dict = sl.get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, array_number, shower_number, trys_number, station_number, trigger_thresh)
+
+    out_file = open(shower_dict_file, 'wb')
+    pickle.dump(shower_dict, out_file)
+    out_file.close()
+    print('created new shower list file')
 
 #create dataframe with all information from dictionary
 shower_df = pd.DataFrame(shower_dict)
 
 #calculate trigger efficiency
-log_energy_list, energy_trigger_efficiency = ee.get_eff_energy(shower_df)
-zenith_bin_low_deg_list, zenith_trigger_efficiency = ez.get_eff_zenith(shower_df)
+logE, Etrigeff = ee.get_eff_energy(shower_df)
+Zlow, Ztrigeff = ez.get_eff_zenith(shower_df)
 
-#save trigger efficiency
-save_file = 'trigger_eff_{0}_{1}.npz'.format(arraynr, int(trigger_thresh))
-np.savez(save_file, log_energy_list=logE, energy_trigger_efficiency=Etrigeff, zenith_bin_low_deg_list=Zlow, zenith_trigger_efficiency=Ztrigeff)
+#save trigger efficiency in human readable format
+trigger_energy_dict = {'log energy':logE, 'trig eff energy':Etrigeff}
+trigger_zenith_dict = {'zenith bin deg low':Zlow, 'trig eff zenith':Ztrigeff}
+trigger_energy_df = pd.DataFrame(trigger_energy_dict)
+trigger_zenith_df = pd.DataFrame(trigger_zenith_dict)
+
+save_energy_file = 'trigger_energy_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
+save_zenith_file = 'trigger_zenith_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
+
+trigger_energy_df.to_csv(save_energy_file, sep='\t')
+trigger_zenith_df.to_csv(save_zenith_file, sep='\t')
 
