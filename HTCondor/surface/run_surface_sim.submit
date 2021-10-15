@@ -11,9 +11,9 @@ request_memory  = 8000
 # These arguments will be passed to the bash script
 Arguments = $(THETA_DIST) $(THETA_BIN) $(ENERGY_BIN) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(RADIUS) $(TRY_NUMBER)
 
-output          = /user/rstanley/CORSIKA/surfacelogs/out/$(LOG_NAME).out 
+output          = /user/rstanley/logs/surfacelogs/out/$(LOG_NAME).out 
 #**
-error           = /user/rstanley/CORSIKA/surfacelogs/err/$(LOG_NAME).err 
+error           = /user/rstanley/logs/surfacelogs/err/$(LOG_NAME).err 
 #**
 
 queue

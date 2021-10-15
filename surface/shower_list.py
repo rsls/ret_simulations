@@ -11,7 +11,9 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
     shower_number = int(shower_number)
     
     energy_list = np.array([])
+    #energy_bin_list = np.array([])
     zenith_list = np.array([])
+    #zenith_bin_list = np.array([])
     azimuth_list = np.array([])
     corex_list = np.array([])
     corey_list = np.array([])
@@ -19,10 +21,10 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
     trigger_number_list = np.array([])
 
     for i in range(len(energy_bin_list)):
-        energy_bin = energy_bin_list[i]
+        energy_bin = int(energy_bin_list[i])
     
         for j in range(len(zenith_bin_list)):
-            zenith_bin = zenith_bin_list[j]
+            zenith_bin = int(zenith_bin_list[j])
 
             for k in range(shower_number):
                 run_number = k + 1
@@ -34,9 +36,11 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
                 
                     if os.path.isfile(depositfile):
                         deposit_file = open(depositfile)
-                        header = deposit_file.readline().split()
+                        print(depositfile)
                     
-                        try:
+                        #try:
+                        for m in range(1):
+                            header = deposit_file.readline().split()
                             #take header information and add to list for dictionary
                             energy, zenith, azimuth, corex, corey = float(header[1]), float(header[2]), float(header[3]), float(header[4]), float(header[5])
                             #convert rest of file into deposits and check if they trigger detector above threshold
@@ -57,23 +61,34 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
                             detector_halves = np.split(triggered_stations, 2)
                             number_in_half = station_number / 2
 
-                            if (np.sum(detector_halves) >= number_in_half):
-                                trigger = 1
+                            detector_part_1 = detector_halves[0]
+                            detector_part_2 = detector_halves[1]
 
+                            detector_part_1_sum = np.sum(detector_part_1)
+                            detector_part_2_sum = np.sum(detector_part_2)
+
+                            if ((detector_part_1_sum >= number_in_half) or (detector_part_2_sum >= number_in_half)):
+                                trigger = 1
                             else:
                                 trigger = 0
 
                             energy_list = np.concatenate((energy_list, [energy]))
+                            #energy_bin_list = np.concatenate((energy_bin_list, [energy_bin]))
                             zenith_list = np.concatenate((zenith_list, [zenith]))
+                            #zenith_bin_list = np.concatenate((zenith_bin_list, [zenith_bin]))
                             azimuth_list = np.concatenate((azimuth_list, [azimuth]))
                             corex_list = np.concatenate((corex_list, [corex]))
                             corey_list = np.concatenate((corey_list, [corey]))
                             trigger_list = np.concatenate((trigger_list, [trigger]))
                             trigger_number_list = np.concatenate((trigger_number_list, [triggered_stations_number]))
 
-                        except Exception as e_message:
-                            print(depositfile)
-                            print(e_message)
+                        #except Exception as e_message:
+                        #    print(depositfile)
+                        #    print(e_message)
     
-    shower_dict = dictionary = {'energy':energy_list, 'zenith':zenith_list, 'azimuth':azimuth_list, 'corex':corex_list, 'corey':corey_list, 'trigger':trigger_list, 'trigger number':trigger_number_list}
+    shower_dict = dictionary = {'energy':energy_list,  'zenith':zenith_list, 'azimuth':azimuth_list, 'corex':corex_list, 'corey':corey_list, 'trigger':trigger_list, 'trigger number':trigger_number_list}
+
     return shower_dict
+
+
+#'energy_bin':energy_bin_list,'zenith_bin':zenith_bin_list,

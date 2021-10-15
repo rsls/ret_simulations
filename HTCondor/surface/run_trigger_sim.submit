@@ -11,9 +11,9 @@ request_memory  = 8000
 # These arguments will be passed to the bash script
 Arguments = $(THETA_DIST) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(TRY_NUMBER) $(THRESH)
 
-output          = /user/rstanley/CORSIKA/triggerlogs/out/$(LOG_NAME).out 
+output          = /user/rstanley/logs/triggerlogs/out/$(LOG_NAME).out 
 #**
-error           = /user/rstanley/CORSIKA/triggerlogs/err/$(LOG_NAME).err 
+error           = /user/rstanley/logs/triggerlogs/err/$(LOG_NAME).err 
 #**
 
 queue
