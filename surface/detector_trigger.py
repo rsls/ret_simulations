@@ -57,21 +57,21 @@ shower_dict_file = 'shower_info_{0}_{1}.pkl'.format(array_number, int(trigger_th
 shower_dict_path = '/user/rstanley/detector/shower_info/' + shower_dict_file
 
 if os.path.isfile(shower_dict_path):
+    print('loaded pickled shower list file')
     in_file = open(shower_dict_path, 'rb')
     shower_dict = pickle.load(in_file)
-    print('loaded pickled shower list file')
+    
 
 else:
+    print('created new shower list file')
     shower_dict = sl.get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, array_number, shower_number, trys_number, station_number, trigger_thresh)
 
     out_file = open(shower_dict_file, 'wb')
     pickle.dump(shower_dict, out_file)
     out_file.close()
-    print('created new shower list file')
-
+    
 #create dataframe with all information from dictionary
 shower_df = pd.DataFrame(shower_dict)
-print(shower_df)
 
 #calculate trigger efficiency for energy and save in human readable format
 logE, Etrigeff = ee.get_eff_energy(shower_df)
@@ -80,19 +80,19 @@ trigger_energy_df = pd.DataFrame(trigger_energy_dict)
 save_energy_file = 'trigger_energy_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
 trigger_energy_df.to_csv(save_energy_file, sep='\t')
 
-"""
+
 #calculate trigger efficiency for energy in different zenith bins and save in human readable format
 zenith_bin_list = np.array([0, 1, 2, 3])
 
 for i in range (zenith_bin_list.shape[0]):
     zenith_bin = zenith_bin_list[i]
     
-    logE, Etrigeff_bin = ee.get_eff_energy_binned(shower_dict, zenith_bin)
+    logE, Etrigeff_bin = ee.get_eff_energy_binned(shower_df, zenith_bin)
     trigger_energy_binned_dict = {'log energy':logE, 'trig eff energy bin':Etrigeff_bin}
     trigger_energy_binned_df = pd.DataFrame(trigger_energy_binned_dict)
     save_energy_binned_file = 'trigger_energy_eff_binned_{0}_{1}_{2}.csv'.format(array_number, int(trigger_thresh), zenith_bin)
     trigger_energy_binned_df.to_csv(save_energy_binned_file, sep='\t')
-"""
+
 #calculate trigger efficiency for zenith and save in human readable format
 Zlow, Ztrigeff = ez.get_eff_zenith(shower_df)
 trigger_zenith_dict = {'zenith bin deg low':Zlow, 'trig eff zenith':Ztrigeff}
@@ -100,19 +100,19 @@ trigger_zenith_df = pd.DataFrame(trigger_zenith_dict)
 save_zenith_file = 'trigger_zenith_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
 trigger_zenith_df.to_csv(save_zenith_file, sep='\t')
 
-"""
+
 #calculate trigger efficiency for zenith in different energy bins and save in human readable format
-energy_bin_list = [150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 184, 186, 188, 190]
+energy_bin_list = np.array([150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 184, 186, 188, 190])
 
 for j in range (energy_bin_list.shape[0]):
     energy_bin = energy_bin_list[j]
     
-    Zlow, Ztrigeff_bin = ez.get_eff_zenith_binned(shower_dict, energy_bin)
+    Zlow, Ztrigeff_bin = ez.get_eff_zenith_binned(shower_df, energy_bin)
     trigger_zenith_binned_dict = {'zenith bin deg low':Zlow, 'trig eff zenith':Ztrigeff_bin}
     trigger_zenith_binned_df = pd.DataFrame(trigger_zenith_binned_dict)
     save_zenith_binned_file = 'trigger_zenith_eff_binned_{0}_{1}_{2}.csv'.format(array_number, int(trigger_thresh), energy_bin)
     trigger_zenith_binned_df.to_csv(save_zenith_binned_file, sep='\t')
-"""
+
 
 
 
