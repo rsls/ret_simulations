@@ -46,15 +46,15 @@ det_time = str(options.time) #time of day for which the shower was simulated
 
 #set up file paths for array layout and geant file to be use. 
 arrayfile = '/user/rstanley/detector/layout/layout_{0}.txt'.format(array_number) #**
-geantfile = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/geant/RET{7}.txt'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number)
+geantfile = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/geant/RET{7}.txt'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number)
 
 coreX = np.zeros(try_number)
 coreY = np.zeros(try_number)
 
 #make directory for storing energy deposits for different layouts
-#deposit_dir_upper = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time)
+#deposit_dir_upper = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time)
 #os.makedirs(deposit_dir_upper, exist_ok = True) 
-#deposit_dir = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/deposit_{7}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, array_number)
+#deposit_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/deposit_{7}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, array_number)
 #os.makedirs(deposit_dir, exist_ok = True) 
 
 #find energy deposits in scintillators for each core position for the shower 

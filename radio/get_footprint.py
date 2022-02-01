@@ -43,10 +43,10 @@ filt_high = float(options.filterhigh)
 
 shower_number = str(run_number).zfill(6)
 
-data_dir = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time)
+data_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time)
 
 #make output directory
-out_file_path = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh)
+out_file_path = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh)
 os.makedirs(out_file_path, exist_ok=True)
 
 plot_dir = '/user/rstanley/simulations/radio/162_0_45_negative/'
@@ -87,7 +87,7 @@ phi = 180 * (azimuth_rot/np.pi)
 """
 data_dict = {"energy":energy, "zenith":theta, "azimuth":phi, "xmax":xmax, "filter low":filt_low, "filter high":filt_high, "ant pos shw":ant_pos_uvw, "ant pos grd":ant_pos_xyz, "time":time, "efield shw":efield_uvw, "efield grd":efield_xyz, "poldata":poldata, "efield filt shw":efield_filt_uvw, "time filt":time_filt, "filt fluence":fluence}
 
-#out_file = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}/RAD{9}.pkl'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh, shower_number)
+#out_file = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}/RAD{9}.pkl'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh, shower_number)
 out_file = plot_dir + 'RAD{0}.pkl'.format(shower_number)
 
 out_file_obj = open(out_file, 'wb')

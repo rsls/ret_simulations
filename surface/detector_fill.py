@@ -86,10 +86,10 @@ def fill(file, xcore, ycore, array):
             dep[j]=0.0
         else:
             dep[j] = Aeff*data.T[1][radBin[j]]  #select EM deposit from poisson distribution
-            depg[j] = dep[j]*(data.T[2][j]/100) #other columns give percentage of energy deposition in gama, electron, muon and hadron components
-            depe[j] = dep[j]*(data.T[3][j]/100) #these lines find the energy deposit for all of these components
-            depm[j] = dep[j]*(data.T[4][j]/100)
-            deph[j] = dep[j]*(data.T[5][j]/100)
+            depg[j] = dep[j]*(data.T[2][radBin[j]]/100) #other columns give percentage of energy deposition in gama, electron, muon and hadron components
+            depe[j] = dep[j]*(data.T[3][radBin[j]]/100) #these lines find the energy deposit for all of these components
+            depm[j] = dep[j]*(data.T[4][radBin[j]]/100)
+            deph[j] = dep[j]*(data.T[5][radBin[j]]/100)
             Xx[j] = detectors.T[0][j] #detector x position in area
             Yy[j] = detectors.T[1][j] #detector y position in area
 

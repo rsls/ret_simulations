@@ -11,9 +11,9 @@ reas_file="${TMPDIR}/${6}/SIM${5}.reas"
 geant_file="${TMPDIR}/${6}/RET${5}.txt"
 
 
-output_dir="/pnfs/iihe/radar/corsika/qgsjet/${1}/${13}/${4}/${3}/${2}/${11}/${12}/"
-steering_dir="/pnfs/iihe/radar/corsika/qgsjet/${1}/${13}/${4}/${3}/${2}/${11}/${12}/steering/"
-geant_dir="/pnfs/iihe/radar/corsika/qgsjet/${1}/${13}/${4}/${3}/${2}/${11}/${12}/geant/"
+output_dir="/pnfs/iihe/radar/corsika/QGSJET/${1}/${13}/${4}/${3}/${2}/${11}/${12}/"
+steering_dir="/pnfs/iihe/radar/corsika/QGSJET/${1}/${13}/${4}/${3}/${2}/${11}/${12}/steering/"
+geant_dir="/pnfs/iihe/radar/corsika/QGSJET/${1}/${13}/${4}/${3}/${2}/${11}/${12}/geant/"
 temp_dir="${TMPDIR}/${6}/"
 
 echo ${3} ${5}

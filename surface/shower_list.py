@@ -32,7 +32,7 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, a
                 for l in range(trys_number):
                     try_number = l
 
-                    depositfile = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/deposit_{7}/deposit{8}_{9}.dat'.format(theta_dist, det_location, prim_part, energy_bin, zenith_bin, det_season, det_time, array_number, run_number, try_number)
+                    depositfile = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/deposit/deposit_{7}/deposit{8}_{9}.dat'.format(theta_dist, det_location, prim_part, energy_bin, zenith_bin, det_season, det_time, array_number, run_number, try_number)
                 
                     if os.path.isfile(depositfile):
                         deposit_file = open(depositfile)

@@ -6,7 +6,7 @@
 #All angles should be in degrees and energy in GeV
 
 hold_dir="/user/rstanley/CORSIKA/QGSJET/reruns/${1}_${8}_${4}_${3}_${2}_${6}_${7}_${5}/"
-output_dir="/pnfs/iihe/radar/corsika/qgsjet/single_runs/${1}_${8}_${4}_${3}_${2}_${6}_${7}_${5}/"
+output_dir="/pnfs/iihe/radar/corsika/QGSJET/single_runs/${1}_${8}_${4}_${3}_${2}_${6}_${7}_${5}/"
 temp_dir="/scratch/rstanley/${5}${2}${4}/"
 
 input_file="${temp_dir}/RUN${5}.inp"

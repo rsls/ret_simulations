@@ -47,7 +47,7 @@ for i in range(energy_bin_list.shape[0]):
         zenith_bin = zenith_bin_list[j]
 
         #select directory to search in and offset file to compare run numbers against
-        directory = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format(theta_dist, det_location, prim_part, energy_bin, zenith_bin, det_season, det_time)
+        directory = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format(theta_dist, det_location, prim_part, energy_bin, zenith_bin, det_season, det_time)
         offset_file = '/user/rstanley/simulations/HTCondor/corsika/offset/run_number_offset_{2}_{1}_{4}_{5}_{3}_{0}.txt'.format(theta_dist, det_location, prim_part, zenith_bin, det_season, det_time)
         run_number_offset = np.genfromtxt(offset_file, delimiter='\t')
         max_file_number = int(run_number_offset[i])

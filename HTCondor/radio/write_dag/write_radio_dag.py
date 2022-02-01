@@ -81,7 +81,7 @@ for i in range(bin_names.shape[0]):
     for j in range(shower_number):
         #check if run number exists for the particular energy bin
         run_number = "%06d" % (j + 1)
-        longfile = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/DAT{7}.long'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number)
+        longfile = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/DAT{7}.long'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number)
         print(longfile)
         if os.path.isfile(longfile): #if file exists add a job to the dag file
             outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/radio/run_radio_sim.submit\n'.format(job_counter))

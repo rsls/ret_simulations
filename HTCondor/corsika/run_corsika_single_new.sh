@@ -10,9 +10,9 @@ list_file="${TMPDIR}/${6}/SIM${5}.list"
 reas_file="${TMPDIR}/${6}/SIM${5}.reas"
 geant_file="${TMPDIR}/${6}/RET${5}.txt"
 
-output_dir="/pnfs/iihe/radar/corsika/qgsjet/single_runs/td_sp_sl_${3}_${4}/"
-steering_dir="/pnfs/iihe/radar/corsika/qgsjet/single_runs/td_sp_sl_${3}_${4}/steering/"
-#geant_dir="/pnfs/iihe/radar/corsika/qgsjet/single_runs/td_sp_sl_${3}_${4}/geant/"
+output_dir="/pnfs/iihe/radar/corsika/QGSJET/single_runs/td_sp_sl_${3}_${4}/"
+steering_dir="/pnfs/iihe/radar/corsika/QGSJET/single_runs/td_sp_sl_${3}_${4}/steering/"
+#geant_dir="/pnfs/iihe/radar/corsika/QGSJET/single_runs/td_sp_sl_${3}_${4}/geant/"
 temp_dir="${TMPDIR}/${6}/"
 
 rm -rf ${temp_dir}

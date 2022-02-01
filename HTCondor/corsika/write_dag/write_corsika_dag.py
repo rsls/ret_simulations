@@ -35,7 +35,7 @@ Convert parsed options to the format and type needed in code and error parsing
 """
 shower_number = int(options.number)
 #cosmic ray index, error handling for positive indices
-#cr_index = int(options.gamma)
+cr_index = int(options.gamma)
 if (cr_index > 0):
     print('Your CR spectrum index is', cr_index, 'and therefore positive')
     answer = input('Do you want to continue? (y/n): ') 
