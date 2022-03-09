@@ -35,11 +35,11 @@ energy_bin_list = np.array([150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 17
 zenith_bin_list = np.array([0, 1, 2, 3])
 
 #cycle through different energy and zenith bins
-for i in range(energy_bin_list.shape[0]):
-    energy_bin = energy_bin_list[i]
+for j in range(zenith_bin_list.shape[0]):
+    zenith_bin = zenith_bin_list[j]
 
-    for j in range(zenith_bin_list.shape[0]):
-        zenith_bin = zenith_bin_list[j]
+    for i in range(energy_bin_list.shape[0]):
+        energy_bin = energy_bin_list[i]
 
         #select directory to search in and offset file to compare run numbers against
         directory = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format(theta_dist, det_location, prim_part, energy_bin, zenith_bin, det_season, det_time)

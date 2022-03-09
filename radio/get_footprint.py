@@ -49,7 +49,7 @@ data_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/'.format
 out_file_path = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/radio/{7}_{8}'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, options.filterlow, options.filterhigh)
 os.makedirs(out_file_path, exist_ok=True)
 
-plot_dir = '/user/rstanley/simulations/radio/162_0_45_negative/'
+plot_dir = '/user/rstanley/simulations/radio/radio_plots/'
 
 #set magnetic field inclination and alititude based on the detector location
 if (det_location == 'td'):
