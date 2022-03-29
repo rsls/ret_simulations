@@ -1,4 +1,4 @@
-executable	= /user/rstanley/simulations/HTCondor/surface/run_trigger_sim.sh
+executable	= /user/rstanley/simulations/HTCondor/trigger/run_trigger_sim.sh
 
 #**
 # This option takes all your env variables from your current session
@@ -9,7 +9,7 @@ notification    = never
 request_memory  = 8000
 
 # These arguments will be passed to the bash script
-Arguments = $(THETA_DIST) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(TRY_NUMBER) $(THRESH)
+Arguments = $(THETA_DIST) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(TRY_NUMBER) $(THRESH) $(GEN_NUMBER) $(ENERGY_BIN)
 
 output          = /user/rstanley/logs/triggerlogs/out/$(LOG_NAME).out 
 #**

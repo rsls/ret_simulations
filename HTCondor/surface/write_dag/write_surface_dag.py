@@ -24,6 +24,9 @@ parser.add_option("-s", "--season", default = "g", help = "season for atmosphere
 parser.add_option("-t", "--time", default = "g", help = "time for atmospheric profile, d=day, n=night, g=general")
 parser.add_option("-l", "--location", default = "td", help = "location of detector, td=Taylor Dome")
 
+parser.add_option("--scint", default="lo", help = "scintillator type, lo=Lofar, it=IceTop")
+
+parser.add_option("--gennumber", default="0", help = "generation number of array layout")
 parser.add_option("--arraynumber", default = "0", help = "number of array layout")
 parser.add_option("--radius", default = "0", help = "maximum radius of shower core")
 parser.add_option("--trynumber", default = "0", help = "number of core positions to chose")
@@ -64,9 +67,15 @@ det_location = str(options.location)
 if (det_location != 'td'):
     print(det_location, 'is not a currently supported location, please use --help for more information')
     exit()
-#array number, error handling
+#scintillator type, error handling for invalid types
+scint_type = str(options.scint)
+if (scint_type != 'lo'):
+    print(scint_type, 'is not a currently supported scintillator type, please use --help for more information')
+    exit()
+#generation number and array number, error handling
+gen_number = int(options.gennumber)
 array_number = int(options.arraynumber)
-array_file = '/user/rstanley/detector/layout/layout_{0}.txt'.format(array_number) #**
+array_file = '/user/rstanley/detector/layout/layout_{0}_{1}.txt'.format(gen_number, array_number) #**
 if not os.path.exists(array_file):
     print(array_number, 'does not currently refer to an array file in /user/rstanley/detector/layout/, please check the array number or create the file')    
 #radius
@@ -95,7 +104,7 @@ for i in range(bin_names.shape[0]):
     for j in range(shower_number):
         #check if run number exists for the particular energy bin
         run_number = j + 1
-        geantfile = '/pnfs/iihe/radar/corsika/qgsjet/{0}/{1}/{2}/{3}/{4}/{5}/{6}/geant/RET{7}.txt'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, "%06d" % run_number)
+        geantfile = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/geant/RET{7}.txt'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, "%06d" % run_number)
        
         if os.path.isfile(geantfile): #if file exists add a job to the dag file
             outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/surface/run_surface_sim.submit\n'.format(job_counter))
@@ -108,6 +117,8 @@ for i in range(bin_names.shape[0]):
             outfile.write('DET_SEASON="{0}" '.format(det_season))
             outfile.write('DET_TIME="{0}" '.format(det_time))
             outfile.write('DET_LOCATION="{0}" '.format(det_location))
+            outfile.write('SCINT="{0}" '.format(scint_type))
+            outfile.write('GEN_NUMBER="{0}" '.format(gen_number))
             outfile.write('ARRAY_NUMBER="{0}" '.format(array_number))
             outfile.write('RADIUS="{0}" '.format(radius))
             outfile.write('TRY_NUMBER="{0}" '.format(try_number))
