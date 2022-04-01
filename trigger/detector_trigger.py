@@ -62,7 +62,9 @@ station_number = int(det_number / 2)
 
 #create list of ALL showers for a particular array layout and whether they trigger the array above a threshold with half the stations triggering 
 #if it doesn't exist already
-shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5].csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #original system
+#shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}_3.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #any 3 stations
+#shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}_hm.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #half and mid
 shower_dict_path = '/user/rstanley/detector/shower_info/' + shower_dict_file
 
 if os.path.isfile(shower_dict_path):
@@ -77,6 +79,8 @@ else:
 
 #apply trigger conditions to create new dataframe
 trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+#trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_3.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+#trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_hm.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
 trigger_dict_path = '/user/rstanley/detector/trigger_info/' + trigger_dict_file
 
 

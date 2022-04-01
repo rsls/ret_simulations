@@ -49,6 +49,8 @@ all_shower_df = pd.DataFrame()
 
 for energy_bin in energy_bin_list:
     trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+    #trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_3.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+    #trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_hm.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
     trigger_dict_path = '/user/rstanley/detector/trigger_info/' + trigger_dict_file
 
     small_shower_df = pd.read_csv(trigger_dict_path, index_col=False, header=None)
@@ -57,12 +59,16 @@ for energy_bin in energy_bin_list:
 
 all_shower_df.columns = column_names
 all_shower_df.to_csv('/user/rstanley/all_shower_df.csv', index=False)
+#all_shower_df.to_csv('/user/rstanley/all_shower_df_3.csv', index=False)
+#all_shower_df.to_csv('/user/rstanley/all_shower_df_hm.csv', index=False)
 
 #calculate trigger efficiency for energy and save in human readable format
 logE, Etrigeff = ee.get_eff_energy(all_shower_df)
 trigger_energy_dict = {'log energy':logE, 'trig eff energy':Etrigeff}
 trigger_energy_df = pd.DataFrame(trigger_energy_dict)
 save_energy_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
+#save_energy_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_{0}_{1}_3.csv'.format(array_number, int(trigger_thresh))
+#save_energy_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_{0}_{1}_hm.csv'.format(array_number, int(trigger_thresh))
 trigger_energy_df.to_csv(save_energy_file, sep='\t')
 
 
@@ -75,6 +81,8 @@ for zenith_bin in zenith_bin_list:
     trigger_energy_binned_dict = {'log energy':logE, 'trig eff energy bin':Etrigeff_bin}
     trigger_energy_binned_df = pd.DataFrame(trigger_energy_binned_dict)
     save_energy_binned_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_binned_{0}_{1}_{2}.csv'.format(array_number, int(trigger_thresh), zenith_bin)
+    #save_energy_binned_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_binned_{0}_{1}_{2}_3.csv'.format(array_number, int(trigger_thresh), zenith_bin)
+    #save_energy_binned_file = '/user/rstanley/detector/efficiency/trigger_energy_eff_binned_{0}_{1}_{2}_hm.csv'.format(array_number, int(trigger_thresh), zenith_bin)
     trigger_energy_binned_df.to_csv(save_energy_binned_file, sep='\t')
 
 #calculate trigger efficiency for zenith and save in human readable format
@@ -82,6 +90,8 @@ Zlow, Ztrigeff = ez.get_eff_zenith(all_shower_df)
 trigger_zenith_dict = {'zenith bin deg low':Zlow, 'trig eff zenith':Ztrigeff}
 trigger_zenith_df = pd.DataFrame(trigger_zenith_dict)
 save_zenith_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_{0}_{1}.csv'.format(array_number, int(trigger_thresh))
+#save_zenith_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_{0}_{1}_3.csv'.format(array_number, int(trigger_thresh))
+#save_zenith_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_{0}_{1}_hm.csv'.format(array_number, int(trigger_thresh))
 trigger_zenith_df.to_csv(save_zenith_file, sep='\t')
 
 
@@ -93,6 +103,8 @@ for energy_bin in energy_bin_list:
     trigger_zenith_binned_dict = {'zenith bin deg low':Zlow, 'trig eff zenith':Ztrigeff_bin}
     trigger_zenith_binned_df = pd.DataFrame(trigger_zenith_binned_dict)
     save_zenith_binned_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_binned_{0}_{1}_{2}.csv'.format(array_number, int(trigger_thresh), energy_bin)
+    #save_zenith_binned_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_binned_{0}_{1}_{2}_3.csv'.format(array_number, int(trigger_thresh), energy_bin)
+    #save_zenith_binned_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_binned_{0}_{1}_{2}_hm.csv'.format(array_number, int(trigger_thresh), energy_bin)
     trigger_zenith_binned_df.to_csv(save_zenith_binned_file, sep='\t')    
 
 
