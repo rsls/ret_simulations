@@ -94,7 +94,6 @@ save_zenith_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_{0}_{1
 #save_zenith_file = '/user/rstanley/detector/efficiency/trigger_zenith_eff_{0}_{1}_hm.csv'.format(array_number, int(trigger_thresh))
 trigger_zenith_df.to_csv(save_zenith_file, sep='\t')
 
-
 #calculate trigger efficiency for zenith in different energy bins and save in human readable format
 
 for energy_bin in energy_bin_list:
