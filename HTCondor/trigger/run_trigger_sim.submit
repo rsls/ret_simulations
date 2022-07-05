@@ -9,7 +9,7 @@ notification    = never
 request_memory  = 8000
 
 # These arguments will be passed to the bash script
-Arguments = $(THETA_DIST) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(TRY_NUMBER) $(THRESH) $(GEN_NUMBER) $(ENERGY_BIN)
+Arguments = $(THETA_DIST) $(PRIM_PART) $(RUN_NUMBER) $(DET_SEASON) $(DET_TIME) $(DET_LOCATION) $(ARRAY_NUMBER) $(TRY_NUMBER) $(THRESH) $(GEN_NUMBER) $(ENERGY_BIN) $(STATION_REQ)
 
 output          = /user/rstanley/logs/triggerlogs/out/$(LOG_NAME).out 
 #**

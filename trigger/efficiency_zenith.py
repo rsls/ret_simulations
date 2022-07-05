@@ -34,8 +34,8 @@ def get_eff_zenith_binned(shower_df, energy_bin):
     
     energy_bin = int(energy_bin)
 
-    zenith_bin_low_deg_list = np.array([0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60])
-    zenith_bin_high_deg_list = np.array([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65])
+    zenith_bin_low_deg_list = np.array([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60])
+    zenith_bin_high_deg_list = np.array([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65])
 
     zenith_bin_low_list = (np.pi / 180) * zenith_bin_low_deg_list
     zenith_bin_high_list = (np.pi / 180) * zenith_bin_high_deg_list

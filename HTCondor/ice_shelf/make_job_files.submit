@@ -1,0 +1,16 @@
+executable = /software/geant4/ice_shelf/submit_scripts/make_job_files.sh
+
+output         = /user/rstanley/logs/makejoblogs/out/make_job_files_$(LOG_NAME).out
+error          = /user/rstanley/logs/makejoblogs/err/make_job_files_$(LOG_NAME).err
+
+# This option takes all your env variables from your current session
+getenv         = false
+
+universe       = vanilla
+notification   = never
+request_memory = 1000
+
+########################(drum roll..... SUBMIT!)####################
+
+Arguments = $(INPUT_FILE) $(OUTPUT_DIR) $(ZENITH) $(AZIMUTH)
+queue

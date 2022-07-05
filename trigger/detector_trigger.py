@@ -34,6 +34,8 @@ parser.add_option("--arraynumber", default = "0", help = "number of array layout
 parser.add_option("--threshold", default = "energy", help = "trigger threshold on scintillators in MeV")
 parser.add_option("--trynumber", default = "0", help = "number of core positions to chose")
 
+parser.add_option("--stationreq", default = "0", help = "number of stations required to meet threshold for trigger")
+
 (options, args) = parser.parse_args()
 
 #initialise variables for input options
@@ -43,6 +45,8 @@ gen_number = int(options.gennumber)
 array_number = int(options.arraynumber)
 trigger_thresh = float(options.threshold)
 tries_number = int(options.trynumber) #how many core positions to chose, each one will make a different file
+
+station_req = int(options.stationreq)
 
 shower_number = int(options.runnumber) #CORSIKA run number, ( ie RET000040.txt is runnr=40)
 energy_bin = int(options.energy)
@@ -60,11 +64,10 @@ array_file.close()
 det_number = det_positions.shape[0]
 station_number = int(det_number / 2)
 
+
 #create list of ALL showers for a particular array layout and whether they trigger the array above a threshold with half the stations triggering 
 #if it doesn't exist already
-shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5].csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #original system
-#shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}_3.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #any 3 stations
-#shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}_hm.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin) #half and mid
+shower_dict_file = 'shower_info_{0}_{1}_{3}_{2}_{4}_{5}_{6}.csv'.format(gen_number, array_number, int(trigger_thresh), station_req, scint_type, shower_number, energy_bin) 
 shower_dict_path = '/user/rstanley/detector/shower_info/' + shower_dict_file
 
 if os.path.isfile(shower_dict_path):
@@ -78,13 +81,11 @@ else:
 
 
 #apply trigger conditions to create new dataframe
-trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
-#trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_3.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
-#trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_hm.csv'.format(gen_number, array_number, int(trigger_thresh), scint_type, shower_number, energy_bin)
+trigger_dict_file = 'trigger_info_{0}_{1}_{3}_{2}_{4}_{5}_{6}.csv'.format(gen_number, array_number, int(trigger_thresh), station_req, scint_type, shower_number, energy_bin)
 trigger_dict_path = '/user/rstanley/detector/trigger_info/' + trigger_dict_file
 
 
-trigger_df = trig.get_trigger_list(shower_df, station_number, det_number)
+trigger_df = trig.get_trigger_list(shower_df, station_number, det_number, station_req)
 trigger_df.to_csv(trigger_dict_path, header=False, index=False)
 
 

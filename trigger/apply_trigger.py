@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import os
 
-def get_trigger_list(shower_df, station_number, det_number):
+def get_trigger_list(shower_df, station_number, det_number, station_req):
 
     slice_start = 0
     slice_end = det_number
@@ -24,26 +24,11 @@ def get_trigger_list(shower_df, station_number, det_number):
         half_slice = np.array_split(station_trigger, 2)
         half_trigger = [sum(array) for array in half_slice]
 
-        if (half_trigger[0] == 6) or (half_trigger[1] == 6):
+        if station_trigger_number >= int(station_req):
             array_trigger = 1
 
         else:
             array_trigger = 0
-
-        #if station_trigger_number >= 3:
-        #    array_trigger = 1
-
-        #else:
-        #    array_trigger = 0
-
-        #mid_slice = station_trigger[1:5]
-        #mid_trigger = sum(mid_slice) 
-
-        #if (half_trigger[0] == 6) or (half_trigger[1] == 6) or (mid_trigger >=6):
-        #    array_trigger = 1
-
-        #else:
-        #    array_trigger = 0
         
         single_shower_list = [slice_df['try'].iloc[0], slice_df['type'].iloc[0], slice_df['energy bin'].iloc[0], slice_df['energy'].iloc[0], slice_df['zenith bin'].iloc[0], slice_df['zenith'].iloc[0], slice_df['phi'].iloc[0], slice_df['core x'].iloc[0], slice_df['core y'].iloc[0], array_trigger, station_trigger_number]
         column_names = ['try', 'type', 'energy bin', 'energy', 'zenith bin', 'zenith', 'phi', 'core x', 'core y', 'trigger', 'stations trigger']
