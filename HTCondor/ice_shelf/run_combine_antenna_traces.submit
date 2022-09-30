@@ -1,0 +1,16 @@
+executable = /software/geant4/ice_shelf/submit_scripts/run_combine_antenna_traces.sh
+
+output         = /user/rstanley/logs/combineantennalogs/out/combine_antenna_traces_$(LOG_NAME).out
+error          = /user/rstanley/logs/combineantennalogs/err/combine_antenna_traces_$(LOG_NAME).err
+
+# This option takes all your env variables from your current session
+getenv         = false
+
+universe       = vanilla
+notification   = never
+request_memory = 1000
+
+########################(drum roll..... SUBMIT!)####################
+
+Arguments = $(INPUT_DIR)
+queue

@@ -105,7 +105,7 @@ for i in range(bin_names.shape[0]):
         #check if run number exists for the particular energy bin
         run_number = j + 1
         geantfile = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/geant/RET{7}.txt'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, "%06d" % run_number)
-       
+
         if os.path.isfile(geantfile): #if file exists add a job to the dag file
             outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/surface/run_surface_sim.submit\n'.format(job_counter))
             outfile.write('VARS job_{0} '.format(job_counter))
@@ -126,3 +126,4 @@ for i in range(bin_names.shape[0]):
 
             job_counter += 1
 
+outfile.close()

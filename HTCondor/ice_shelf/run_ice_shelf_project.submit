@@ -1,0 +1,17 @@
+executable = /software/geant4/ice_shelf/submit_scripts/run_ice_shelf_project.sh
+
+output         = /user/rstanley/logs/iceshelflogs/out/ice_shelf_$(LOG_NAME).out
+error          = /user/rstanley/logs/iceshelflogs/err/ice_shelf_$(LOG_NAME).err
+
+# This option takes all your env variables from your current session
+getenv         = false
+
+universe       = vanilla
+notification   = never
+request_memory = 8000
+
+########################(drum roll..... SUBMIT!)####################
+
+# Don't forget LOG_NAME
+Arguments = $(INPUT_FILE) $(OUTPUT_FILE) $(RAND_INT) $(ZENITH_ANGLE)
+queue

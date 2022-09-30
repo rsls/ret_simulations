@@ -157,7 +157,7 @@ for i in range(numbers_to_generate.shape[0]):
 
         job_counter += 1
 
-
+outfile.close()
 np.savetxt(offset_file, new_offset, delimiter='\t')
 
 

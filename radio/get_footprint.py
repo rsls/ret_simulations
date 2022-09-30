@@ -50,6 +50,7 @@ out_file_path = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/rad
 os.makedirs(out_file_path, exist_ok=True)
 
 plot_dir = '/user/rstanley/simulations/radio/radio_plots/'
+#plot_dir = '/user/rstanley/AAAAAAH/'
 
 #set magnetic field inclination and alititude based on the detector location
 if (det_location == 'td'):

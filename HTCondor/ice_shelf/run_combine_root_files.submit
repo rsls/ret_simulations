@@ -1,0 +1,17 @@
+executable = /software/geant4/ice_shelf/submit_scripts/run_combine_root_files.sh
+
+output         = /user/rstanley/logs/combinerootlogs/out/combine_root_files_$(LOG_NAME).out
+error          = /user/rstanley/logs/combinerootlogs/err/combine_root_files_$(LOG_NAME).err
+
+# This option takes all your env variables from your current session
+# so there's no need to submit your env-shell.sh to the cluster
+getenv         = false
+
+universe       = vanilla
+notification   = never
+request_memory = 1000
+
+########################(drum roll..... SUBMIT!)####################
+
+Arguments = $(INPUT_DIR)
+queue

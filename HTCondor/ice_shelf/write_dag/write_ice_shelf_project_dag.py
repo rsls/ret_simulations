@@ -1,5 +1,4 @@
 """
-Write dag file to make jobs to divide corsika output files into input subfiles for the ice shelf geant simulation
 Writes out job name, variable names and values, and log name for each job allocated
 Input options
 Outputs a dag file with all job for all subfile creations requested
@@ -11,6 +10,9 @@ import re
 import numpy as np
 from datetime import date
 from datetime import datetime
+import glob
+
+
 
 """
 Commandline options
@@ -71,8 +73,13 @@ get_date = date.today().strftime('%Y%m%d')
 get_time = datetime.now().strftime("%H%M%S")
 dag_file_path = '/user/rstanley/simulations/HTCondor/ice_shelf/dagfiles/{0}/{1}/'.format(get_date, get_time)
 os.makedirs(dag_file_path, exist_ok=True)
-dag_file = '/user/rstanley/simulations/HTCondor/ice_shelf/dagfiles/{0}/{1}/run_make_job_files_{0}_{1}.dag'.format(get_date, get_time)
+dag_file = '/user/rstanley/simulations/HTCondor/ice_shelf/dagfiles/{0}/{1}/run_ice_shelf_project_{0}_{1}.dag'.format(get_date, get_time)
 outfile=open(dag_file, 'w')
+
+
+datetime_int = int(datetime.now().strftime('%m%d%H%M%S'))
+print(datetime_int)
+np.random.seed(datetime_int)
 
 #generation of different jobs for dag file
 job_counter = 0
@@ -84,32 +91,35 @@ for i in range(bin_names.shape[0]):
         run_number = j + 1
         run_number_long = "%06d" % run_number
 
-        input_file = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/DAT{7}'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long)
-        output_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/ice_shelf/subfiles/{7}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long) 
+        subfiles_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/ice_shelf/subfiles/{7}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long) 
+        output_dir = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/ice_shelf/subfiles_run/{7}/'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long)
+        steer_file = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/steering/RUN{7}.inp'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long)
 
         os.makedirs(output_dir, exist_ok=True)
 
-        if os.path.isfile(input_file): #if the files exists add a job to the dag file
+        file=open(steer_file,'r')
+        file.seek(0)
+        zenith_list=(re.findall("THETAP.*",file.read()))[0]
+        zenith=float(zenith_list.split()[1]) #degrees
+        file.close() 
 
-            steer_file = '/pnfs/iihe/radar/corsika/QGSJET/{0}/{1}/{2}/{3}/{4}/{5}/{6}/steering/RUN{7}.inp'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long)
+        input_files = glob.glob("{0}/geant4*.txt".format(subfiles_dir))
+        input_files = [elt.split('/')[-1] for elt in input_files]
 
-            file=open(steer_file,'r')
-            az_list=re.findall("PHI.*",file.read())[0]
-            azimuth=np.mod(float(az_list.split()[1]),360.0) #degrees
-                 
-            file.seek(0)
-            zenith_list=(re.findall("THETAP.*",file.read()))[0]
-            zenith=float(zenith_list.split()[1]) #degrees
-            file.close()       
-            
-            outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/ice_shelf/make_job_files.submit\n'.format(job_counter))
+        for k in range(len(input_files)):
+
+            rand_int = int(np.random.rand()*215)
+            output_file = input_files[k][:-4]
+
+            outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/ice_shelf/run_ice_shelf_project.submit\n'.format(job_counter))
             outfile.write('VARS job_{0} '.format(job_counter))
-            outfile.write('INPUT_FILE="{0}" '.format(input_file))
-            outfile.write('OUTPUT_DIR="{0}" '.format(output_dir))
-            outfile.write('ZENITH="{0}" '.format(zenith))
-            outfile.write('AZIMUTH="{0}" '.format(azimuth))
-            outfile.write('LOG_NAME="{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}"\n'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long))
+            outfile.write('INPUT_FILE="{0}/{1}" '.format(subfiles_dir, input_files[k]))
+            outfile.write('OUTPUT_FILE="{0}/{1}" '.format(output_dir, output_file))
+            outfile.write('RAND_INT="{0}" '.format(rand_int))
+            outfile.write('ZENITH_ANGLE="{0}" '.format(zenith))
+            outfile.write('LOG_NAME="{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}_{8}"\n'.format(theta_dist, det_location, prim_part, energy_bin, theta_bin, det_season, det_time, run_number_long, k))
 
             job_counter += 1
-
+        
 outfile.close()
+
