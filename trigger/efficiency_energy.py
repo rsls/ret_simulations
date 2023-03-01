@@ -11,6 +11,7 @@ def get_eff_energy(shower_df):
     energy_trigger_efficiency = np.empty([len(energy_bin_list)])
 
     for i in range(len(energy_bin_list)):
+        #print(i)
         energy_bin = energy_bin_list[i]
 
         energy_df = shower_df[shower_df['energy bin'] == energy_bin]
@@ -37,6 +38,7 @@ def get_eff_energy_binned(shower_df, zenith_bin):
     shower_df_stripped = shower_df[shower_df['zenith bin'] == zenithbin].reset_index(drop=True)
 
     for i in range(len(energy_bin_list)):
+        #print(i)
         energy_bin = energy_bin_list[i]
 
         energy_df = shower_df_stripped[shower_df_stripped['energy bin'] == energy_bin]

@@ -39,7 +39,7 @@ parser.add_option("--stationreq", default = "0", help = "number of stations requ
 """
 Convert parsed options to the format and type needed in code and error parsing 
 """
-shower_number = int(options.runnumber)
+run_number = int(options.runnumber)
 #theta distribution, error handling for invalid distributions
 theta_dist = str(options.distribution)
 if (theta_dist != 'costheta') and (theta_dist != 'theta'):
@@ -104,5 +104,31 @@ dag_file = '/user/rstanley/simulations/HTCondor/trigger/dagfiles/{0}/{1}/run_sur
 
 
 outfile=open(dag_file, 'w')
+
+#generation of different jobs for dag file
+job_counter = 0
+for i in range(bin_names.shape[0]):
+    energy_bin = bin_names[i]
+
+    outfile.write('JOB job_{0} /user/rstanley/simulations/HTCondor/trigger/run_trigger_sim.submit\n'.format(job_counter))
+    outfile.write('VARS job_{0} '.format(job_counter))
+    outfile.write('THETA_DIST="{0}" '.format(theta_dist))
+    outfile.write('ENERGY_BIN="{0}" '.format(energy_bin))
+    outfile.write('PRIM_PART="{0}" '.format(prim_part))
+    outfile.write('RUN_NUMBER="{0}" '.format(run_number))
+    outfile.write('DET_SEASON="{0}" '.format(det_season))
+    outfile.write('DET_TIME="{0}" '.format(det_time))
+    outfile.write('DET_LOCATION="{0}" '.format(det_location))
+    outfile.write('SCINT="{0}" '.format(scint_type))
+    outfile.write('GEN_NUMBER="{0}" '.format(gen_number))
+    outfile.write('ARRAY_NUMBER="{0}" '.format(array_number))
+    outfile.write('TRY_NUMBER="{0}" '.format(try_number))
+    outfile.write('THRESH="{0}" '.format(thresh))
+    outfile.write('STATION_REQ="{0}" '.format(station_req))
+    outfile.write('LOG_NAME="{0}_{1}_{2}_{3}_{4}_{5}_{6}"\n'.format(theta_dist, energy_bin, theta_bin, prim_part, job_counter, thresh, station_req))
+ 
+    job_counter += 1
+
+outfile.close()
 
 

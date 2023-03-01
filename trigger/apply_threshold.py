@@ -34,6 +34,8 @@ def get_shower_list(theta_dist, prim_part, det_location, det_season, det_time, g
                     single_shower_df['shower number'] = run_number
                     single_shower_df['over threshold'] = np.where(single_shower_df['total dep'] >= threshold, True, False)
 
+                    print(zenith_bin)  
+
                     all_shower_df = pd.concat([all_shower_df, single_shower_df], ignore_index=True, axis=0)
 
                 except Exception as e_message:
